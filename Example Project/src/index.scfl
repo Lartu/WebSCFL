@@ -1,0 +1,9 @@
+HEAD:
+PAGETITLE    My amazing website!
+DESCRIPTION  This is my amazing website.
+BACKGROUND   tumblr_inline_n5br2sjbGJ1r4ugnn540.gif
+STYLE        style.css
+
+BODY:
+TITLE        Hello
+WRITE        Welcome to my amazing website!

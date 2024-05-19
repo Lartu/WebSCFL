@@ -1,0 +1,81 @@
+/* PAGE BODY */
+body {
+    padding: 2em;
+    background-repeat: repeat;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    line-height: 1.5em;
+    font-style: normal;
+    font-size: 14px;
+}
+
+/* TITLE */
+h1 {
+    text-shadow: 2px 2px 0px white;
+    margin-top: 4rem;
+}
+h1:first-of-type{
+    margin-top: 0px;
+}
+
+/* HEADER */
+h2 {
+    text-shadow: 2px 2px 0px white;
+    margin-bottom: 0px;
+    margin-top: 2rem;
+}
+
+/* SUBHEADER */
+h3 {
+    text-shadow: 1px 1px 0px white;
+    margin-bottom: 0px;
+    margin-top: 2rem;
+}
+
+/* images for IMAGE and LINKIMAGE */
+img {
+    margin-bottom: 0px;
+}
+
+/* LINK */
+.link {
+    color: rgb(0, 51, 255);
+    text-decoration: none;
+}
+
+.link::before {
+    content: "<";
+}
+
+.link::after {
+    content: ">";
+}
+
+/* LINKIMAGE */
+.linkimage {
+    text-decoration: none;
+    background: none;
+}
+
+/* FOOTNOTE */
+.footnote
+{
+    font-size: 80%;
+}
+
+/* LISTITEM */
+.list_item
+{
+    margin-left: 1rem;
+}
+
+/* Spacing between titles, headers and images, and text */
+
+.small_separator {
+    height: 0.5rem;
+}
+
+/* --- User Defined Styling for Images --- */
+
+.cartridge {
+    max-height: 100px;
+}
