@@ -1,4 +1,4 @@
-!()[logo.png]
+![](https://github.com/Lartu/WebSCFL/blob/main/logo.png)
 
 # WebSFCL 🌎
 
