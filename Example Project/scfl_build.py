@@ -144,11 +144,11 @@ def compile_file(filename: str):
 
                 elif compile_mode == BODY:
                     if command == "TITLE":
-                        if added_visible_content:
+                        '''if added_visible_content:
                             if just_added_title_importance >= 3:
                                 add_line_to_file("<div class='mid_separator'></div>")
                             else:
-                                add_line_to_file("<div class='big_separator'></div>")
+                                add_line_to_file("<div class='big_separator'></div>")'''
                         add_line_to_file(f"<h1>{argument}</h1>")
                         requires_margin_above = True
                         just_added_title_importance = 3
