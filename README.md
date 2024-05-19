@@ -1,3 +1,5 @@
+!()[logo.png)
+
 # WebSFCL 🌎
 
 WebSCFL stands for *Web Sectioned Command First Language*. It's a programming language
