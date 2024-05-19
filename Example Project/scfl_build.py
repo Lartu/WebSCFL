@@ -97,9 +97,9 @@ def compile_file(filename: str):
                     origin = origin.strip()
                     destination = destination.strip()
                     try:
-                        copy_file_relative(origin, f"{RESULT_DIR}/{destination}")
+                        copy_file_relative(origin, destination)
                     except:
-                        error(f"Couldn't copy file {origin} to {RESULT_DIR}/{destination}.")
+                        error(f"Couldn't copy file {origin} to {destination}.")
                     continue
 
                 # Compile mode commands

@@ -1,34 +1,28 @@
 /* PAGE BODY */
 body {
-    padding: 2em;
+    padding: 1em;
     background-repeat: repeat;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    line-height: 1.5em;
+    font-family: 'Times New Roman', Times, serif;
     font-style: normal;
-    font-size: 14px;
+    font-size: 12pt;
 }
 
 /* TITLE */
 h1 {
-    text-shadow: 2px 2px 0px white;
-    margin-top: 4rem;
-}
-h1:first-of-type{
     margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 /* HEADER */
 h2 {
-    text-shadow: 2px 2px 0px white;
+    margin-top: 0px;
     margin-bottom: 0px;
-    margin-top: 2rem;
 }
 
 /* SUBHEADER */
 h3 {
-    text-shadow: 1px 1px 0px white;
+    margin-top: 0px;
     margin-bottom: 0px;
-    margin-top: 2rem;
 }
 
 /* images for IMAGE and LINKIMAGE */
@@ -38,16 +32,16 @@ img {
 
 /* LINK */
 .link {
-    color: rgb(0, 51, 255);
-    text-decoration: none;
+    color: blue;
+    text-decoration: underline;
 }
 
 .link::before {
-    content: "<";
+    content: "";
 }
 
 .link::after {
-    content: ">";
+    content: "";
 }
 
 /* LINKIMAGE */
@@ -72,6 +66,12 @@ img {
 
 .small_separator {
     height: 0.5rem;
+}
+
+/* Big spacing above titles and headers*/
+
+.big_separator {
+    height: 2rem;
 }
 
 /* --- User Defined Styling for Images --- */
