@@ -3,7 +3,7 @@
 # Lartu's WebSCFL Builder
 # 18Y24
 # WebSCFL stands for Web Sectioned Command First Language
-# Version 1.1
+# Version 1.2
 
 import os
 import shutil
@@ -140,7 +140,7 @@ def compile_file(filename: str):
                     if command == "TITLE":
                         if added_visible_content:
                             if just_added_title_importance >= 3:
-                                add_line_to_file("<div class='small_separator'></div>")
+                                add_line_to_file("<div class='mid_separator'></div>")
                             else:
                                 add_line_to_file("<div class='big_separator'></div>")
                         add_line_to_file(f"<h1>{argument}</h1>")
@@ -150,7 +150,7 @@ def compile_file(filename: str):
                     elif command == "HEADER":
                         if added_visible_content:
                             if just_added_title_importance >= 2:
-                                add_line_to_file("<div class='small_separator'></div>")
+                                add_line_to_file("<div class='mid_separator'></div>")
                             else:
                                 add_line_to_file("<div class='big_separator'></div>")
                         add_line_to_file(f"<h2>{argument}</h2>")

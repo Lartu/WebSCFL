@@ -68,6 +68,12 @@ img {
     height: 0.5rem;
 }
 
+/* Mid spacing above headers and below titles*/
+
+.mid_separator {
+    height: 1rem;
+}
+
 /* Big spacing above titles and headers*/
 
 .big_separator {
