@@ -1,4 +1,4 @@
-!()[logo.png)
+!()[logo.png]
 
 # WebSFCL 🌎
 
