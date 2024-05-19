@@ -9,8 +9,8 @@ because I always end up fighting against CSS and changing the style of my sites 
 to actually focus on the content instead of the styling.
 
 For examples of websites created with WebSFCL check:
-- [Lartu.net](https://www.lartu.net)
-- [Optativa](https://optativa.github.io)
+- [Lartu.net](https://www.lartu.net) ([source](https://github.com/lartu/lartu.github.io))
+- [Optativa](https://optativa.github.io) ([source](https://github.com/optativa/optativa.github.io))
 
 ## Usage
 
