@@ -8,7 +8,7 @@ websites. The websites can be later customized further configured using CSS. I d
 because I always end up fighting against CSS and changing the style of my sites and I'd like
 to actually focus on the content instead of the styling.
 
-For examples of pages created with WebSFCL check:
+For examples of websites created with WebSFCL check:
 - [Lartu.net](https://www.lartu.net)
 - [Optativa](https://optativa.github.io)
 
