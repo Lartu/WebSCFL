@@ -80,6 +80,13 @@ img {
     height: 2rem;
 }
 
+/* Styling for the note that mentions that the website was compiled with WebSCFL */
+.compilenote{
+    font-size: 10px;
+    text-align: center;
+    margin-top: 1rem;
+}
+
 /* --- User Defined Styling for Images --- */
 
 /* ... */

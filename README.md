@@ -133,6 +133,13 @@ These commands must be in the section defined by the `BODY:` section separator.
    - Example: `LISTITEM element1`
    - Example: `LISTITEM element2`
    - Example: `LISTITEM element3`
+- `NEWLINE`
+   - Adds a line break to the text added via `WRITE`. Unlike `BREAK`, `NEWLINE` doesn't
+   leave any whitespace between lines.
+   - Example: `NEWLINE`
+- `COMPILENOTE`
+   - Adds a small note indicating when and how the page was compiled.
+   - Example: `COMPILENOTE`
 
 ### Any Section Commands
 - `INCLUDE`

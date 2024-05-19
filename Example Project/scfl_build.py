@@ -3,10 +3,11 @@
 # Lartu's WebSCFL Builder
 # 18Y24
 # WebSCFL stands for Web Sectioned Command First Language
-# Version 1.2
+# Version 1.3
 
 import os
 import shutil
+from datetime import datetime
 
 
 INCLUDE_DIR = "include"
@@ -48,6 +49,11 @@ def replace_extension(file_path, new_extension):
     base_name, _ = os.path.splitext(file_path)
     new_file_path = base_name + new_extension
     return new_file_path
+
+
+def webpage_compiled_message():
+    current_time = datetime.now().strftime("%Y-%m-%d, %H:%M")
+    return f"Webpage compiled on {current_time} using <a href='https://github.com/Lartu/WebSCFL/' class='link'>WebSCFL</a>."
 
 
 def error(message: str):
@@ -162,15 +168,17 @@ def compile_file(filename: str):
                             if just_added_title_importance >= 1:
                                 add_line_to_file("<div class='small_separator'></div>")
                             else:
-                                add_line_to_file("<div class='big_separator'></div>")
+                                add_line_to_file("<div class='mid_separator'></div>")
                         add_line_to_file(f"<h3>{argument}</h3>")
                         requires_margin_above = True
                         just_added_title_importance = 1
                         added_visible_content = True
                     elif command == "LINK":
+                        if requires_margin_above:
+                            add_line_to_file("<div class='small_separator'></div>")
                         just_added_title_importance = 0
                         linktokens = argument.split(",", 2)
-                        linktext = linktokens[0].strip()
+                        linktext = linktokens[0].strip().replace("&com;", ",")
                         linkdest = linktokens[1].strip()
                         othertext = "" if len(linktokens) <= 2 else linktokens[2].strip()
                         add_line_to_file(f"<a class='link' href='{linkdest}'>{linktext}</a>{othertext}")
@@ -219,6 +227,7 @@ def compile_file(filename: str):
                         requires_margin_above = True
                         added_visible_content = True
                     elif command == "BREAK":
+                        just_added_title_importance = 0
                         add_line_to_file("<div class='small_separator'></div>")
                         add_line_to_file("<div class='small_separator'></div>")
                     elif command == "LISTITEM":
@@ -228,6 +237,12 @@ def compile_file(filename: str):
                         add_line_to_file(f"<li class='list_item'>{argument}</li>")
                         requires_margin_above = False
                         added_visible_content = True
+                    elif command == "NEWLINE":
+                        just_added_title_importance = 0
+                        add_line_to_file("<br>")
+                    elif command == "COMPILENOTE":
+                        just_added_title_importance = 0
+                        add_line_to_file(f"<div class='compilenote'>{webpage_compiled_message()}</div>")
                     else:
                         error(f"Unknown command {command} in BODY mode.")
 
