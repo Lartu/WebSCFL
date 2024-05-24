@@ -33,6 +33,14 @@ def copy_file_relative(src_relative_path, dest_relative_path):
     shutil.copy(src_path, dest_path)
 
 
+def copy_dir_relative(src_relative_path, dest_relative_path):
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    src_path = os.path.join(script_dir, src_relative_path)
+    dest_path = os.path.join(script_dir, dest_relative_path)
+    print(f"Copied {src_path} to {dest_path}.")
+    shutil.copytree(src_path, dest_path)
+
+
 def list_files_in_folder(relative_folder_path):
     print(f"Looking for {FILE_EXTENSION} files in {relative_folder_path}.")
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -104,8 +112,17 @@ def compile_file(filename: str):
                     destination = destination.strip()
                     try:
                         copy_file_relative(origin, destination)
-                    except:
-                        error(f"Couldn't copy file {origin} to {destination}.")
+                    except Exception as e:
+                        error(f"Couldn't copy file {origin} to {destination}: {e}")
+                    continue
+                elif command == "COPYDIR":  # DOCUMENTAR
+                    origin, destination = argument.split(",", 1)
+                    origin = origin.strip()
+                    destination = destination.strip()
+                    try:
+                        copy_dir_relative(origin, destination)
+                    except Exception as e:
+                        error(f"Couldn't copy directory {origin} to {destination}: {e}")
                     continue
 
                 # Compile mode commands
@@ -177,10 +194,16 @@ def compile_file(filename: str):
                         if requires_margin_above:
                             add_line_to_file("<div class='small_separator'></div>")
                         just_added_title_importance = 0
-                        linktokens = argument.split(",", 2)
-                        linktext = linktokens[0].strip().replace("&com;", ",")
+                        separator = "||"
+                        if separator not in argument:
+                            separator = ","
+                        linktokens = argument.split(separator, 2)
+                        linktext = linktokens[0].strip().replace("&com;", ",")  # DOCUMENTAR
+                        linktext = linktokens[0].strip().replace("&doublepipe;", "||")  # DOCUMENTAR
                         linkdest = linktokens[1].strip()
-                        othertext = "" if len(linktokens) <= 2 else linktokens[2].strip()
+                        othertext = "" if len(linktokens) < 3 else linktokens[2].strip()
+                        if othertext and othertext[0] not in "),.;:!?":
+                            othertext = f" {othertext}"
                         add_line_to_file(f"<a class='link' href='{linkdest}'>{linktext}</a>{othertext}")
                         added_visible_content = True
                     elif command == "WRITE":
@@ -234,9 +257,23 @@ def compile_file(filename: str):
                         just_added_title_importance = 0
                         if requires_margin_above:
                             add_line_to_file("<div class='small_separator'></div>")
-                        add_line_to_file(f"<li class='list_item'>{argument}</li>")
                         requires_margin_above = False
                         added_visible_content = True
+                        separator = "||"
+                        if separator in argument:
+                            # Line with link
+                            argument = argument.strip()
+                            linktokens = argument.split(separator, 3)
+                            linktext = linktokens[0].strip().replace("&doublepipe;", "||")  # DOCUMENTAR
+                            linkdest = linktokens[1].strip()
+                            othertext = "" if len(linktokens) < 3 else linktokens[2].strip()
+                            if othertext and othertext[0] not in "),.;:!?":
+                                othertext = f" {othertext}"
+                            add_line_to_file(f"<li class='list_item'><a class='link' href='{linkdest}'>{linktext}</a>{othertext}</li>")
+                        else:
+                            # Line without link
+                            argument = argument.strip().replace("&doublepipe;", "||")  # DOCUMENTAR
+                            add_line_to_file(f"<li class='list_item'>{argument}</li>")
                     elif command == "NEWLINE":
                         just_added_title_importance = 0
                         add_line_to_file("<br>")
@@ -265,6 +302,11 @@ def compile_file(filename: str):
 def setup():
     create_directory("docs")
     create_directory("docs/images")
+    try:
+        shutil.copytree("files", "docs/files")  # DOCUMENTAR
+        print("Copied the files directory to docs/files")
+    except Exception as e:
+        print(f"Warning: files director not found. Skipping copy.")
     try:
         copy_file_relative(f"{OTHER_DIR}/external-link.png", f"{RESULT_DIR}/{RESULT_IMAGES_DIR}/external-link.png")
     except:
