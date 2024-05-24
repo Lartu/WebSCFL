@@ -80,7 +80,7 @@ def compile_file(filename: str):
 
     def add_line_to_file(line: str):
         nonlocal result_file_contents
-        while "[[" in line:
+        while "[[" in line:  # DOCUMENTAR
             index = line.index("[[")
             if "]]" not in line:
                 error(f"[[ without ]] found in line {line}.")
@@ -114,6 +114,10 @@ def compile_file(filename: str):
     with open(filename, "r") as file:
         for line in file.readlines():
             line = line.strip()
+
+            if line and line[0] in ["#", "!"]:
+                continue
+
             tokens = line.split(None, 1)
             if tokens:
                 command = tokens[0].upper().strip()
