@@ -61,7 +61,7 @@ def replace_extension(file_path, new_extension):
 
 def webpage_compiled_message():
     current_time = datetime.now().strftime("%Y-%m-%d, %H:%M")
-    return f"Webpage compiled on {current_time} using <a href='https://github.com/Lartu/WebSCFL/' class='link'>WebSCFL</a>."
+    return f"Webpage compiled on {current_time} using [[https://github.com/Lartu/WebSCFL/ WebSCFL]]."
 
 
 def error(message: str):
