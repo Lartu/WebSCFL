@@ -225,7 +225,7 @@ def compile_file(filename: str):
                             separator = ","
                         linktokens = argument.split(separator, 2)
                         linktext = linktokens[0].strip().replace("&com;", ",")  # DOCUMENTAR
-                        linktext = linktokens[0].strip().replace("&doublepipe;", "||")  # DOCUMENTAR
+                        linktext = linktext.replace("&doublepipe;", "||")  # DOCUMENTAR
                         linkdest = linktokens[1].strip()
                         othertext = "" if len(linktokens) < 3 else linktokens[2].strip()
                         target = ""
