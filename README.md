@@ -11,9 +11,13 @@ websites. The websites can be later customized further configured using CSS. I d
 because I always end up fighting against CSS and changing the style of my sites and I'd like
 to actually focus on the content instead of the styling.
 
-For examples of websites created with WebSFCL check:
-- [Lartu.net](https://www.lartu.net) ([source](https://github.com/lartu/lartu.github.io))
-- [Optativa](https://optativa.github.io) ([source](https://github.com/optativa/optativa.github.io))
+## Examples 
+
+**Optativa** ([visit website](https://optativa.github.io)) ([source](https://github.com/optativa/optativa.github.io))
+![](examplesite1.png)
+
+**Lartu.net** ([visit website](https://www.lartu.net)) ([source](https://github.com/lartu/lartu.github.io))
+![](examplesite2.png)
 
 ## Usage
 
