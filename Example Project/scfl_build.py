@@ -3,7 +3,7 @@
 # Lartu's WebSCFL Builder
 # 18Y24
 # WebSCFL stands for Web Sectioned Command First Language
-# Version 1.4
+# Version 1.5
 
 import os
 import shutil
@@ -80,6 +80,28 @@ def compile_file(filename: str):
 
     def add_line_to_file(line: str):
         nonlocal result_file_contents
+        while "[[" in line:
+            index = line.index("[[")
+            if "]]" not in line:
+                error(f"[[ without ]] found in line {line}.")
+            else:
+                endindex = line.index("]]")
+            rawlink = line[index:endindex+2]
+            if "||" not in rawlink:
+                tokens = rawlink[2:-2].split(sep=None, maxsplit=1)
+                linkdest = tokens[0].strip()
+                linktext = tokens[1].strip()
+            else:
+                tokens = rawlink[2:-2].split(sep="||", maxsplit=1)
+                linkdest = tokens[1].strip()
+                linktext = tokens[0].strip()
+            target = ""
+            external = ""
+            if "http://" in linkdest or "https://" in linkdest:
+                target = "target=_blank"
+                external = f"<img src='{RESULT_IMAGES_DIR}/external-link.png'>"
+            link = f"<a class='link' href='{linkdest}' {target}>{linktext}{external}</a>"
+            line = line.replace(rawlink, link)
         result_file_contents = f"{result_file_contents}\n{line}"
 
     compile_mode = HEAD
@@ -202,9 +224,14 @@ def compile_file(filename: str):
                         linktext = linktokens[0].strip().replace("&doublepipe;", "||")  # DOCUMENTAR
                         linkdest = linktokens[1].strip()
                         othertext = "" if len(linktokens) < 3 else linktokens[2].strip()
+                        target = ""
+                        external = ""
+                        if "http://" in linkdest or "https://" in linkdest:
+                            target = "target=_blank"
+                            external = f"<img src='{RESULT_IMAGES_DIR}/external-link.png'>"
                         if othertext and othertext[0] not in "),.;:!?":
                             othertext = f" {othertext}"
-                        add_line_to_file(f"<a class='link' href='{linkdest}'>{linktext}</a>{othertext}")
+                        add_line_to_file(f"<a class='link' href='{linkdest}' {target}>{linktext}{external}</a>{othertext}")
                         added_visible_content = True
                     elif command == "WRITE":
                         just_added_title_importance = 0
@@ -235,7 +262,10 @@ def compile_file(filename: str):
                         imagesrc = imagetokens[0].strip()
                         destination = imagetokens[1].strip()
                         classes = imagetokens[2].strip().replace(",", " ") if len(imagetokens) >= 3 else ""
-                        add_line_to_file(f"<div><a class='linkimage' href='{destination}'><img src='{RESULT_IMAGES_DIR}/{imagesrc}' class='{classes}'><img src='{RESULT_IMAGES_DIR}/external-link.png'></a></div>")
+                        target = ""
+                        if "http://" in destination or "https://" in destination:
+                            target = "target=_blank"
+                        add_line_to_file(f"<div><a class='linkimage' href='{destination}' {target}><img src='{RESULT_IMAGES_DIR}/{imagesrc}' class='{classes}'><img src='{RESULT_IMAGES_DIR}/external-link.png'></a></div>")
                         try:
                             copy_file_relative(f"{IMAGES_DIR}/{imagesrc}", f"{RESULT_DIR}/{RESULT_IMAGES_DIR}/{imagesrc}")
                         except:
@@ -259,21 +289,7 @@ def compile_file(filename: str):
                             add_line_to_file("<div class='small_separator'></div>")
                         requires_margin_above = False
                         added_visible_content = True
-                        separator = "||"
-                        if separator in argument:
-                            # Line with link
-                            argument = argument.strip()
-                            linktokens = argument.split(separator, 3)
-                            linktext = linktokens[0].strip().replace("&doublepipe;", "||")  # DOCUMENTAR
-                            linkdest = linktokens[1].strip()
-                            othertext = "" if len(linktokens) < 3 else linktokens[2].strip()
-                            if othertext and othertext[0] not in "),.;:!?":
-                                othertext = f" {othertext}"
-                            add_line_to_file(f"<li class='list_item'><a class='link' href='{linkdest}'>{linktext}</a>{othertext}</li>")
-                        else:
-                            # Line without link
-                            argument = argument.strip().replace("&doublepipe;", "||")  # DOCUMENTAR
-                            add_line_to_file(f"<li class='list_item'>{argument}</li>")
+                        add_line_to_file(f"<li class='list_item'>{argument}</li>")
                     elif command == "NEWLINE":
                         just_added_title_importance = 0
                         add_line_to_file("<br>")
