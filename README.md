@@ -13,7 +13,7 @@ to actually focus on the content instead of the styling.
 
 Alternatively, you can think of WebSCFL as *"what if we coded websites with Assembly instead of HTML?"*
 
-## Examples 
+## 👩‍🏫 Examples 
 
 **Optativa** ([visit website](https://optativa.github.io)) ([source](https://github.com/optativa/optativa.github.io))
 
@@ -23,12 +23,12 @@ Alternatively, you can think of WebSCFL as *"what if we coded websites with Asse
 
 ![](examplesite2s.png)
 
-## Usage
+## 🧰 Usage
 
 WebSCFL is especially tailored to creating GitHub Pages and, as such, it compiles your website into a `docs` directory,
 so you can have both the source for your site and your site in the same repository without having to redeploy anything.
 
-### Directory Setup
+### 📂 Directory Setup
 
 ![](directory.png)
 
@@ -53,7 +53,7 @@ Each folder plays a different role in building your webpage.
 
 :warning: Bear in mind that as WebSCFL compiles your website into a newly created `docs` directory, should a `docs` folder already exist in the project directory, it will be deleted!
 
-## WebSCFL Files
+## 📃 WebSCFL Files
 WebSCFL turns `.scfl` files into `.html` files that can be displayed on your browser.
 Any `.scfl` files that you want to include in your webpage must be added to the `src` folder.
 Basic `.scfl` files must contain two sections, a HEAD and a BODY:
@@ -77,7 +77,7 @@ PAGETITLE My wonderful site!
 
 Will set the title displayed by the browser when visiting that page to *My wonderful site!*.
 
-## Example WebSCFL Page
+## 🧑‍🏫 Example WebSCFL Page
 Here's a very basic example WebSCFL page.
 
 ```
@@ -99,11 +99,11 @@ of your stylesheet file (in this case `style.css`, to be found in the `include` 
 
 ![](example.png)
 
-## WebSCFL Commands
+## 🗺️ WebSCFL Commands
 
 This section lists the commands that can be used in each section, along with their arguments.
 
-### HEAD Section Commands
+### 👤 HEAD Section Commands
 These commands must be in the section defined by the `HEAD:` section separator.
 
 - `PAGETITLE`
@@ -119,7 +119,7 @@ These commands must be in the section defined by the `HEAD:` section separator.
    - Sets the tiled page background image. The image is expected to be found in the `images` folder.
    - Example: `BACKGROUND mybackground.gif`
 
-### BODY Section Commands
+### 🧍 BODY Section Commands
 These commands must be in the section defined by the `BODY:` section separator.
 
 - `TITLE`
@@ -168,7 +168,7 @@ These commands must be in the section defined by the `BODY:` section separator.
    - Adds a small note indicating when and how the page was compiled.
    - Example: `COMPILENOTE`
 
-### Any Section Commands
+### ❇️ Any Section Commands
 - `INCLUDE`
    - Copies the contents of another file verbatim into the generated `.html` file. The other file is expected to be foun in the `include` folder.
    - Example: `INCLUDE somecontent.html`
@@ -179,7 +179,7 @@ These commands must be in the section defined by the `BODY:` section separator.
    - Copies a directory to a path in the `docs` (build) directory.
    - Example: `COPYDIR documents/mypresentation, presentation`
 
-### A Note About Links
+### 🔗 A Note About Links
 
 In all commands you can use the shorthand forms to insert a link:
 - `[[https://destination Link Text]]`
@@ -194,5 +194,5 @@ WRITE       This paragraph [[https://lartu.net does too]], isn't that great?
 
 If you need to display the `||` characters within a shorthand link, use `&doublepipe;` instead.
 
-# License
+# 📜 License
 WebSCFL is released under the Apache 2 license. Copyright © Lartu, 2024.
