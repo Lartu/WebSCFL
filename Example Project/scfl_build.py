@@ -3,7 +3,7 @@
 # Lartu's WebSCFL Builder
 # 18Y24
 # WebSCFL stands for Web Sectioned Command First Language
-# Version 1.3
+# Version 1.4
 
 import os
 import shutil
