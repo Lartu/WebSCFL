@@ -169,10 +169,11 @@ These commands must be in the section defined by the `BODY:` section separator.
 
 ### A Note About Links
 
-In all commands you can use the shorthand forms:
+In all commands you can use the shorthand forms to insert a link:
 - `[[https://destination Link Text]]`
 - `[[Link Text || https://destination]]`
-to insert a link. For example:
+
+For example:
 
 ```
 LISTITEM    This list item contains a [[Link || https://github.com/lartu]]!
