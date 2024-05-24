@@ -101,6 +101,7 @@ def compile_file(filename: str):
                 target = "target=_blank"
                 external = f"<img src='{RESULT_IMAGES_DIR}/external-link.png'>"
             link = f"<a class='link' href='{linkdest}' {target}>{linktext}{external}</a>"
+            link = link.replace("&doublepipe;", "||")  # DOCUMENTAR
             line = line.replace(rawlink, link)
         result_file_contents = f"{result_file_contents}\n{line}"
 
