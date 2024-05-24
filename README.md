@@ -11,6 +11,8 @@ websites. The websites can be later customized further configured using CSS. I d
 because I always end up fighting against CSS and changing the style of my sites and I'd like
 to actually focus on the content instead of the styling.
 
+Alternatively, you can think of WebSCFL as *"what if we coded websites with Assembly instead of HTML?"*
+
 ## Examples 
 
 **Optativa** ([visit website](https://optativa.github.io)) ([source](https://github.com/optativa/optativa.github.io))
