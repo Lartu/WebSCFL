@@ -1,5 +1,7 @@
 ![](logo.png)
-<img src="https://img.shields.io/badge/Current_Version-1.5.svg">
+
+[![Current Version - 1.5](https://img.shields.io/badge/Current_Version-1.5-2ea44f)](https://)
+[![License - Apache 2](https://img.shields.io/badge/License-Apache_2-ff9900)](https://)
 
 # WebSFCL 🌎
 
