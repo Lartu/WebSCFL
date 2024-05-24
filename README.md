@@ -14,10 +14,10 @@ to actually focus on the content instead of the styling.
 ## Examples 
 
 **Optativa** ([visit website](https://optativa.github.io)) ([source](https://github.com/optativa/optativa.github.io))
-![](examplesite1.png)
+![](examplesite1s.png)
 
 **Lartu.net** ([visit website](https://www.lartu.net)) ([source](https://github.com/lartu/lartu.github.io))
-![](examplesite2.png)
+![](examplesite2s.png)
 
 ## Usage
 
