@@ -28,6 +28,8 @@ so you can have both the source for your site and your site in the same reposito
 
 ### Directory Setup
 
+![](directory.png)
+
 WebSCFL expects the project directory to be configured with four foulders, an optional folder, and the WebSCFL build
 file:
 
@@ -45,7 +47,7 @@ Each folder plays a different role in building your webpage.
 - The `images` folder should include the images you'll use in your `.scfl` files. WebSCFL only looks for images in this directory and only copies the images that are actually used to the final built webpage.
 - The `include` folder may include your stylesheet file and any other `.html` files you want to include verbatim into your built pages using the `INCLUDE` command.
 - The `other` folder includes files used by WebSCFL when compiling your webpage. You might edit them, but make sure not to remove any of these files.
-- Optionally, you may add a `files` folder. The `files` folder, if found, is always copied into the `docs` directory when the site is compiled.
+- *Optionally*, you may add a `files` folder. The `files` folder, if found, is always copied into the `docs` directory when the site is compiled.
 
 :warning: Bear in mind that as WebSCFL compiles your website into a newly created `docs` directory, should a `docs` folder already exist in the project directory, it will be deleted!
 
