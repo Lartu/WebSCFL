@@ -1,4 +1,5 @@
 ![](logo.png)
+<img src="https://img.shields.io/badge/Current_Version-1.5.svg">
 
 # WebSFCL 🌎
 
@@ -14,9 +15,12 @@ For examples of websites created with WebSFCL check:
 
 ## Usage
 
+WebSCFL is especially tailored to creating GitHub Pages and, as such, it compiles your website into a `docs` directory,
+so you can have both the source for your site and your site in the same repository without having to redeploy anything.
+
 ### Directory Setup
 
-WebSCFL expects the project directory to be configured with four foulders and the WebSCFL build
+WebSCFL expects the project directory to be configured with four foulders, an optional folder, and the WebSCFL build
 file:
 
 ```
@@ -24,6 +28,7 @@ file:
 /include
 /other
 /src
+/files [optional]
 scfl_build.py
 ```
 
@@ -32,6 +37,9 @@ Each folder plays a different role in building your webpage.
 - The `images` folder should include the images you'll use in your `.scfl` files. WebSCFL only looks for images in this directory and only copies the images that are actually used to the final built webpage.
 - The `include` folder may include your stylesheet file and any other `.html` files you want to include verbatim into your built pages using the `INCLUDE` command.
 - The `other` folder includes files used by WebSCFL when compiling your webpage. You might edit them, but make sure not to remove any of these files.
+- Optionally, you may add a `files` folder. The `files` folder, if found, is always copied into the `docs` directory when the site is compiled.
+
+:warning: Bear in mind that as WebSCFL compiles your website into a newly created `docs` directory, should a `docs` folder already exist in the project directory, it will be deleted!
 
 ## WebSCFL Files
 WebSCFL turns `.scfl` files into `.html` files that can be displayed on your browser.
@@ -116,9 +124,12 @@ These commands must be in the section defined by the `BODY:` section separator.
    - Example: `WRITE Welcome to my website! Here you'll find amazing stuff!`
 - `LINK`
    - Adds a link to another website or page within your site. Optionally, you can specify some text to be appended to the link (but not to be a link) immediately after it.
-   - Example for a link without appended text: `LINK Google, https://www.google.com`
-   - Example for a link to another page within your site: `LINK About Me, about.html`
-   - Example for a link with appended text: `LINK Google, https://www.google.com, ; the famous search engine.`
+      - Example for a link without appended text: `LINK Google, https://www.google.com`
+      - Example for a link to another page within your site: `LINK About Me, about.html`
+      - Example for a link with appended text: `LINK Google, https://www.google.com, ; the famous search engine.`
+   - Alternatively, instead of `,` to separate parameters, you can use `||`.
+   - In the `LINK` command, the `&com;` string is replaced by a `,` in the resulting line.
+   - In the `LINK` command, the `&doublepipe;` string is replaced by a `||` in the resulting line.
 - `IMAGE`
    - Adds an image to your page. The image will be displayed on its own line. Optionally, you can specify any CSS classes to be used to style this image. These classes should be defined within your used stylesheet file.
    - Example without CSS styling: `IMAGE mypicture.png`
@@ -150,8 +161,22 @@ These commands must be in the section defined by the `BODY:` section separator.
    - Copies the contents of another file verbatim into the generated `.html` file. The other file is expected to be foun in the `include` folder.
    - Example: `INCLUDE somecontent.html`
 - `COPY`
-   - Copies a file from a directory into the `docs` (build) directory.
-   - Example: `COPY awonderfulapp.exe downloads/awonderfulapp.exe`
+   - Copies a file from a directory to a path in the `docs` (build) directory.
+   - Example: `COPY awonderfulapp.exe, downloads/awonderfulapp.exe`
+- `COPYDIR`
+   - Copies a directory to a path in the `docs` (build) directory.
+   - Example: `COPYDIR documents/mypresentation, presentation`
+
+### A Note About Links
+
+In all commands you can use the shorthand forms `[[https://destination Link Text]]` or `[[Link Text || https://destination]]` to insert a link. For example:
+
+```
+LISTITEM    This list item contains a [[Link || https://github.com/lartu]]!
+WRITE       This paragraph [[https://lartu.net does too]], isn't that great?
+```
+
+If you need to display the `||` characters within a shorthand link, use `&doublepipe;` instead.
 
 # License
 WebSCFL is released under the Apache 2 license. Copyright © Lartu, 2024.
