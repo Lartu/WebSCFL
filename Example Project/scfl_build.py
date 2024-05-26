@@ -80,7 +80,8 @@ def compile_file(filename: str):
 
     def add_line_to_file(line: str):
         nonlocal result_file_contents
-        while "[[" in line:  # DOCUMENTAR
+        # Replace wikimedia-like links
+        while "[[" in line:
             index = line.index("[[")
             if "]]" not in line:
                 error(f"[[ without ]] found in line {line}.")
@@ -101,8 +102,27 @@ def compile_file(filename: str):
                 target = "target=_blank"
                 external = f"<img src='{RESULT_IMAGES_DIR}/external-link.png'>"
             link = f"<a class='link' href='{linkdest}' {target}>{linktext}{external}</a>"
-            link = link.replace("&doublepipe;", "||")  # DOCUMENTAR
             line = line.replace(rawlink, link)
+        # Replace tooltips
+        while "[(" in line:   # DOCUMENTAR
+            index = line.index("[(")
+            if ")]" not in line:
+                error(f"[( without )] found in line {line}.")
+            else:
+                endindex = line.index(")]")
+            rawtooltip = line[index:endindex+2]
+            if "||" not in rawtooltip:
+                error(f"[( ... )] tooltip without || found in line {line}.")
+            else:
+                tokens = rawtooltip[2:-2].split(sep="||", maxsplit=1)
+                text = tokens[0].strip()
+                info = tokens[1].strip()
+            tooltip = f"<span class='tooltip' title='{info}'>{text}</span>"
+            line = line.replace(rawtooltip, tooltip)
+        # Replacements
+        line = line.replace("&[;", "[")  # DOCUMENTAR
+        line = line.replace("&];", "]")  # DOCUMENTAR
+        line = line.replace("&doublepipe;", "||")  # DOCUMENTAR
         result_file_contents = f"{result_file_contents}\n{line}"
 
     compile_mode = HEAD
@@ -136,16 +156,16 @@ def compile_file(filename: str):
                 elif command == "COPY":
                     origin, destination = argument.split(",", 1)
                     origin = origin.strip()
-                    destination = destination.strip()
+                    destination = f"{RESULT_DIR}/{destination.strip()}"
                     try:
                         copy_file_relative(origin, destination)
                     except Exception as e:
                         error(f"Couldn't copy file {origin} to {destination}: {e}")
                     continue
-                elif command == "COPYDIR":  # DOCUMENTAR
+                elif command == "COPYDIR":
                     origin, destination = argument.split(",", 1)
                     origin = origin.strip()
-                    destination = destination.strip()
+                    destination = f"{RESULT_DIR}/{destination.strip()}"
                     try:
                         copy_dir_relative(origin, destination)
                     except Exception as e:
@@ -225,8 +245,8 @@ def compile_file(filename: str):
                         if separator not in argument:
                             separator = ","
                         linktokens = argument.split(separator, 2)
-                        linktext = linktokens[0].strip().replace("&com;", ",")  # DOCUMENTAR
-                        linktext = linktext.replace("&doublepipe;", "||")  # DOCUMENTAR
+                        linktext = linktokens[0].strip().replace("&com;", ",")
+                        linktext = linktext.replace("&doublepipe;", "||")
                         linkdest = linktokens[1].strip()
                         othertext = "" if len(linktokens) < 3 else linktokens[2].strip()
                         target = ""
@@ -324,7 +344,7 @@ def setup():
     create_directory("docs")
     create_directory("docs/images")
     try:
-        shutil.copytree("files", "docs/files")  # DOCUMENTAR
+        shutil.copytree("files", "docs/files")
         print("Copied the files directory to docs/files")
     except Exception as e:
         print(f"Warning: files director not found. Skipping copy.")
